@@ -1,0 +1,13 @@
+<<<<<<< HEAD
+streamlit
+tensorflow==2.13.0
+pillow
+numpy
+gdown
+=======
+streamlit
+tensorflow==2.13.0
+pillow
+numpy
+gdown
+>>>>>>> d2b87dc07c3ba2ed42c81f24468fc3ebacf1fe77
