@@ -121,11 +121,12 @@ def load_model():
     file_id = "1izlzNjTNlOtVTG00rjrdt4xi-NmbLDNo"
     url = f"https://drive.google.com/uc?id={file_id}"
 
+    # download only if not exists
     if not os.path.exists(MODEL_PATH):
-        with st.spinner("Downloading model..."):
-            gdown.download(url, MODEL_PATH, quiet=False)
+        gdown.download(url, MODEL_PATH, quiet=False)
 
     return tf.keras.models.load_model(MODEL_PATH)
+
 model = load_model()
 
 # ✅ CORRECT DATASET PATH
