@@ -132,9 +132,15 @@ def load_model():
         with st.spinner("Downloading model..."):
             gdown.download(url, MODEL_PATH, quiet=False)
 
-    return tf.keras.models.load_model(MODEL_PATH, compile=False)
+    return tf.keras.models.load_model(
+    MODEL_PATH,
+    compile=False,
+    custom_objects={"InputLayer": tf.keras.layers.InputLayer}
+)
 
 model = load_model()
+
+st.write("Model exists:", os.path.exists("model/plant_model.h5"))
 
 # ---------- CLASSES ----------
 classes = [
