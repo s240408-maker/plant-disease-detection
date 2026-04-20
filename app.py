@@ -6,7 +6,20 @@ import gdown
 import os
 
 # ---------- PAGE CONFIG ----------
-st.set_page_config(page_title="Plant Disease Detection", layout="centered")
+st.set_page_config(
+    page_title="Plant Doctor",
+    page_icon="🌿",
+    layout="centered"
+)
+
+# ---------- HIDE STREAMLIT HEADER ----------
+st.markdown("""
+<style>
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+header {visibility: hidden;}
+</style>
+""", unsafe_allow_html=True)
 
 # ---------- LIGHT NATURE CSS ----------
 st.markdown("""
@@ -118,16 +131,24 @@ def load_model():
 
 model = load_model()
 
-# ---------- CLASSES ----------
-dataset_path = "dataset/PlantVillage"
-
-classes = sorted([
-    folder for folder in os.listdir(dataset_path)
-    if os.path.isdir(os.path.join(dataset_path, folder))
-])
+# ---------- CLASSES (FIXED for CLOUD) ----------
+classes = [
+    "Tomato___Bacterial_spot",
+    "Tomato___Early_blight",
+    "Tomato___Late_blight",
+    "Tomato___Leaf_Mold",
+    "Tomato___Septoria_leaf_spot",
+    "Tomato___Spider_mites",
+    "Tomato___Target_Spot",
+    "Tomato___Yellow_Leaf_Curl_Virus",
+    "Tomato___healthy"
+]
 
 # ---------- HOME ----------
 if menu == "Home":
+
+    # ✅ LOGO ADDED
+    st.image("https://cdn-icons-png.flaticon.com/512/2909/2909763.png", width=90)
 
     st.markdown('<div class="title">Plant Disease Detection</div>', unsafe_allow_html=True)
     st.markdown('<div class="card">', unsafe_allow_html=True)
