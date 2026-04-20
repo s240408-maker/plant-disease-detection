@@ -1,3 +1,4 @@
+```python
 import streamlit as st
 import tensorflow as tf
 from PIL import Image
@@ -79,25 +80,30 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+# ---------- SESSION STATE ----------
+if "logged_in" not in st.session_state:
+    st.session_state.logged_in = False
+
 # ---------- LOGIN ----------
 def login():
     st.markdown('<div class="card">', unsafe_allow_html=True)
     st.markdown('<div class="title"> Login</div>', unsafe_allow_html=True)
 
-    username = st.text_input("Username")
-    password = st.text_input("Password", type="password")
+    st.text_input("Username", key="username")
+    st.text_input("Password", type="password", key="password")
 
     if st.button("Login"):
-        if username == "admin" and password == "1234":
+        if (
+            st.session_state.username == "admin"
+            and st.session_state.password == "1234"
+        ):
             st.session_state.logged_in = True
+            st.success("Login Successful ✅")
+            st.rerun()
         else:
             st.error("Invalid Username or Password")
 
     st.markdown('</div>', unsafe_allow_html=True)
-
-# Session state
-if "logged_in" not in st.session_state:
-    st.session_state.logged_in = False
 
 if not st.session_state.logged_in:
     login()
@@ -131,7 +137,7 @@ def load_model():
 
 model = load_model()
 
-# ---------- CLASSES (FIXED for CLOUD) ----------
+# ---------- CLASSES ----------
 classes = [
     "Tomato___Bacterial_spot",
     "Tomato___Early_blight",
@@ -147,7 +153,6 @@ classes = [
 # ---------- HOME ----------
 if menu == "Home":
 
-    # ✅ LOGO ADDED
     st.image("https://cdn-icons-png.flaticon.com/512/2909/2909763.png", width=90)
 
     st.markdown('<div class="title">Plant Disease Detection</div>', unsafe_allow_html=True)
@@ -203,3 +208,4 @@ elif menu == "About Us":
     </p>
     </div>
     """, unsafe_allow_html=True)
+```
