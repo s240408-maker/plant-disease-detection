@@ -127,7 +127,7 @@ def load_model():
         with st.spinner("Downloading model..."):
             gdown.download(url, MODEL_PATH, quiet=False)
 
-    return tf.keras.models.load_model(MODEL_PATH)
+    return tf.keras.models.load_model(MODEL_PATH, compile=False)
 
 model = load_model()
 
